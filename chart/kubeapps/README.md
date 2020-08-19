@@ -292,3 +292,11 @@ kubectl apply -f <repo name>.yaml
 ```
 
 After that you should be able to access the new version of Kubeapps. If the above doesn't work for you or you run into any other issues please open an [issue](https://github.com/kubeapps/kubeapps/issues/new).
+
+### App Repository synchronization cronjob failed to start after a long cluster down time
+
+The Kubernetes has a bug https://github.com/kubernetes/kubernetes/issues/42649 that makes if the cluster has a down time longer than 100x scheduled time interval, the App Repository synchronization cronjob won't be triggered anymore. The cronjob will have events like:
+
+> Cannot determine if default/ needs to be started: Too many missed start times to list
+
+Currently, the Kubernetes haven't fix it yet. A solution is re-create the App Repository in the configuration menu.
